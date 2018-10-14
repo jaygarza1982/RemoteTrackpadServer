@@ -69,6 +69,7 @@ public class RemoteWindow extends JFrame {
 	}
 
 	public void startServer() {
+		//Restart server on a new thread even if it crashes
 		final ServerListener server = new ServerListener(25566);
 		Thread serverThread = new Thread(new Runnable() {
 			public void run() {
