@@ -21,7 +21,7 @@ public class MulticastPublisher {
         				DatagramPacket packet = new DatagramPacket(buf, buf.length, group, 4446);
         				socket.send(packet);
 
-        				Thread.sleep(1500);
+        				Thread.sleep(500);
         			} catch (Exception e) {
         				e.printStackTrace();
         			}

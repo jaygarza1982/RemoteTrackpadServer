@@ -19,6 +19,10 @@ public class ServerListener {
 		RemoteWindow.printInfo("Server running on port " + port + ".");
 		Socket socket = serverSocket.accept();
 		
+		//We add to these slowly to achieve slow scrolling
+		int mouseUp = 0;
+		int mouseDown = 0;
+		
 		while (true) {
 			try {
 				BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
@@ -75,6 +79,17 @@ public class ServerListener {
 				else if (fromRemoteClient.equals("BACKSPACE")) {
 					robot.keyPress(KeyEvent.VK_BACK_SPACE);
 					robot.keyRelease(KeyEvent.VK_BACK_SPACE);
+				}
+				else if (fromRemoteClient.equals("WHEEL DOWN")) {
+					mouseDown += 2;
+					
+					if (mouseDown % 10 == 0)
+						robot.mouseWheel(-1);
+				}
+				else if (fromRemoteClient.equals("WHEEL UP")) {
+					mouseUp -= 2;
+					if (-mouseUp % 10 == 0)
+						robot.mouseWheel(1);
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
